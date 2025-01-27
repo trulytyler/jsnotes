@@ -1,10 +1,11 @@
+@import '~material-design-icons/iconfont/material-icons.css
+
 * {
   margin: auto;
   padding: 0;
   transition: 0.1s;
   }
 
-@import '~material-design-icons/iconfont/material-icons.css';
 
 
 .material-icons {
@@ -167,6 +168,7 @@ button {
   bottom: 15px;
   right: 15px;
   cursor: pointer;
+
 
 }
 
