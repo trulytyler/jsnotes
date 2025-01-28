@@ -10,6 +10,7 @@ function openLesson(lessontypeName) {
   document.getElementById(lessontypeName).style.display = "block";  
 }
 
+
 //create a note
 const notesContainer = document.querySelector(".notes-container");
 const createBtn = document.querySelector(".btn");
@@ -27,8 +28,6 @@ function updateStorage() {
   localStorage.setItem("notes", notesContainer.innerHTML);
 }
 
-
-
 createBtn.addEventListener("click", ()=>{
   let inputBox = document.createElement("p");
   let img = document.createElement("img");
@@ -38,12 +37,14 @@ createBtn.addEventListener("click", ()=>{
   notesContainer.appendChild(inputBox).appendChild(img);
 })
 
+
 //delete a note
 
 notesContainer.addEventListener("click", function(e){
   if(e.target.tagName === "IMG"){
     e.target.parentElement.remove();
     updateStorage();
+    
 }
 else if(e.target.tagName === "P"){
   notes = document.querySelectorAll(".input-box");
@@ -51,8 +52,10 @@ else if(e.target.tagName === "P"){
     nt.onkeyup = function(){
           updateStorage();
     }
+
   })
 }
+    
 })
 
 
@@ -62,3 +65,21 @@ document.addEventListener("keydown", event =>{
     event.preventDefault();
   }
 })
+
+
+
+document.getElementById('clear-storage-btn').addEventListener('click', function () {
+            if (confirm('Are you sure you want to clear local storage? This action cannot be undone.')) {
+                localStorage.clear();
+                alert('Local storage has been successfully cleared!');
+            } else {
+                alert('Action canceled. Local storage remains intact.');
+            }
+        });
+
+//paste unformatted
+   document.querySelector('.input-box').addEventListener('paste', function (e) {
+            e.preventDefault();
+            var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+        });
