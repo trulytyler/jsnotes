@@ -44,7 +44,7 @@ notesContainer.addEventListener("click", function(e){
   if(e.target.tagName === "IMG"){
     e.target.parentElement.remove();
     updateStorage();
-    
+
 }
 else if(e.target.tagName === "P"){
   notes = document.querySelectorAll(".input-box");
@@ -77,9 +77,18 @@ document.getElementById('clear-storage-btn').addEventListener('click', function 
             }
         });
 
-//paste unformatted
-   document.querySelector('.input-box').addEventListener('paste', function (e) {
-            e.preventDefault();
-            var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
-        });
+document.addEventListener('paste', function(event) {
+//  document.execCommand("insertText");
+    // Prevent the default paste behavior
+    event.preventDefault();
+
+    // Get the text from the clipboard
+    navigator.clipboard.readText().then(text => {
+        // Insert the unformatted text into the target element
+        const target = document.getElementById(".input-box");
+      //target.value += text; // For input or textarea elements
+     target.innerText += text; // For other elements like div or p
+    }).catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+    });
+});

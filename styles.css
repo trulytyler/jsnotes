@@ -166,9 +166,14 @@ button {
   bottom: 15px;
   right: 15px;
   cursor: pointer;
-
-
 }
+
+.input-box font{
+font-family: none;
+font-weight: 900;
+text-transform: uppercase;
+}
+
 
 
 .flex-parent {
